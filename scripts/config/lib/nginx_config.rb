@@ -77,6 +77,15 @@ class NginxConfig
         print 'in nginx_config.rb => value =>', value
     end
 
+    json["headers"] ||= {}
+    json["headers"].to_a.reverse.each do |route, header_hash|
+        header_hash.each do |key, value|
+            print 'in loop =>  key', key
+            print 'in loop =>  value', value
+            json["headers"][route][key].merge!(key => NginxConfigUtil.interpolate(value, ENV))
+        end
+    end
+
     json.each do |key, value|
       self.class.send(:define_method, key) { value }
     end
