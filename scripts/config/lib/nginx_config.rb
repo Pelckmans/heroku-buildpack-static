@@ -82,7 +82,8 @@ class NginxConfig
         header_hash.each do |key, value|
             print 'in loop =>  key', key
             print 'in loop =>  value', value
-            json["headers"][route][key].merge!(key => NginxConfigUtil.interpolate(value, ENV))
+            print 'in loop => interpolated', NginxConfigUtil.interpolate(value, ENV)
+            json["headers"][route][key] = NginxConfigUtil.interpolate(value, ENV)
         end
     end
 
