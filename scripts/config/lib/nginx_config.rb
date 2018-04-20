@@ -75,7 +75,7 @@ class NginxConfig
             print 'in loop =>  key', key.to_s
             print 'in loop =>  value', value.to_s
             print 'in loop => interpolated', NginxConfigUtil.interpolate(value.to_s, ENV).to_s
-            json["headers"][route][key.to_s] = NginxConfigUtil.interpolate(value.to_s, ENV).to_s
+            json["headers"][route][key] = NginxConfigUtil.interpolate(value.to_s, ENV).to_s
         end
     end
 
