@@ -75,6 +75,7 @@ class NginxConfig
     json["headers"].each do |key, value|
         print 'in nginx_config.rb => key =>', key
         print 'in nginx_config.rb => value =>', value
+    end
 
     json.each do |key, value|
       self.class.send(:define_method, key) { value }
