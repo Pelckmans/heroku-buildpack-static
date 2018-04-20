@@ -69,8 +69,12 @@ class NginxConfig
     nameservers << [DEFAULT[:resolver]] unless nameservers.empty?
     json["resolver"] = nameservers.join(" ")
 
-    print 'in nginx_config.rb => ENV =>', ENV
+    print 'in nginx_config.rb => ENV =>', ENV["SOME_VAR"]
     print 'in nginx_config.rb =>  json["headers"] =>',  json["headers"]
+
+    json["headers"].each do |key, value|
+        print 'in nginx_config.rb => key =>', key
+        print 'in nginx_config.rb => value =>', value
 
     json.each do |key, value|
       self.class.send(:define_method, key) { value }
