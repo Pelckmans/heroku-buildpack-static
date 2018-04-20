@@ -2,10 +2,11 @@
 eval(File.read('/app/bin/config/lib/nginx_config_util.rb'))
 
 USER_CONFIG = "/app/static.json"
-NGINX_CONFIG = 'config/nginx.conf'
+NGINX_CONFIG = 'config/test.conf'
+
 
 config = {}
-config = JSON.parse(File.read(USER_CONFIG)) if File.exist?(USER_CONFIG)
+config = JSON.parse(File.read(NGINX_CONFIG)) if File.exist?(NGINX_CONFIG)
 req    = Nginx::Request.new
 uri    = req.var.uri
 

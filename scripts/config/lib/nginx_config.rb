@@ -86,6 +86,8 @@ class NginxConfig
 
     print 'printing json', json
 
+    File.write('config/test.conf', json)
+
     json.each do |key, value|
       self.class.send(:define_method, key) { value }
     end
