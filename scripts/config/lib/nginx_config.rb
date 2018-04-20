@@ -69,21 +69,13 @@ class NginxConfig
     nameservers << [DEFAULT[:resolver]] unless nameservers.empty?
     json["resolver"] = nameservers.join(" ")
 
-    print 'in nginx_config.rb => ENV =>', ENV["SOME_VAR"]
-    print 'in nginx_config.rb =>  json["headers"] =>',  json["headers"]
-
-    json["headers"].each do |key, value|
-        print 'in nginx_config.rb => key =>', key
-        print 'in nginx_config.rb => value =>', value
-    end
-
     json["headers"] ||= {}
     json["headers"].to_a.reverse.each do |route, header_hash|
         header_hash.each do |key, value|
-            print 'in loop =>  key', key
-            print 'in loop =>  value', value
+            print 'in loop =>  key', key.to_s
+            print 'in loop =>  value', value.to_s
             print 'in loop => interpolated', NginxConfigUtil.interpolate(value.to_s, ENV).to_s
-            json["headers"][route].merge!(key => NginxConfigUtil.interpolate(value.to_s, ENV).to_s)
+            json["headers"][route].merge!(key.to_s => NginxConfigUtil.interpolate(value.to_s, ENV).to_s)
         end
     end
 
