@@ -6,12 +6,11 @@ NGINX_CONFIG = 'config/nginx.conf'
 
 config = {}
 config = JSON.parse(File.read(USER_CONFIG)) if File.exist?(USER_CONFIG)
-configTest = JSON.parse(File.read(NGINX_CONFIG)) if File.exist?(NGINX_CONFIG)
 req    = Nginx::Request.new
 uri    = req.var.uri
 
-if configTest["headers"]
-  configTest["headers"].to_a.reverse.each do |route, header_hash|
+if config["headers"]
+  config["headers"].to_a.reverse.each do |route, header_hash|
     if Regexp.compile("^#{NginxConfigUtil.to_regex(route)}$") =~ uri
       header_hash.each do |key, value|
 
