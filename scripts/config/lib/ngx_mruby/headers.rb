@@ -13,9 +13,9 @@ if config["headers"]
     if Regexp.compile("^#{NginxConfigUtil.to_regex(route)}$") =~ uri
       header_hash.each do |key, value|
         # value must be a string
-        print 'printing value =>', value
-        print 'printing ENV =>', ENV
-        print 'printing var =>', NginxConfigUtil.interpolate(value.to_s, ENV)
+        print 'in headers.rb => value =>', value
+        print 'in headers.rb => ENV =>', ENV
+        print 'in headers.rb => interpolate result =>', NginxConfigUtil.interpolate(value.to_s, ENV)
 
         req.headers_out[key] = NginxConfigUtil.interpolate(value, ENV).to_s
       end
