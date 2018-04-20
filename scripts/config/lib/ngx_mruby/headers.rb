@@ -17,7 +17,7 @@ if config["headers"]
         print 'in headers.rb => ENV =>', ENV["SOME_VAR"]
         print 'in headers.rb => interpolate result =>', NginxConfigUtil.interpolate(value.to_s, ENV)
 
-        req.headers_out[key] = NginxConfigUtil.interpolate(value, ENV).to_s
+        req.headers_out[key] = NginxConfigUtil.interpolate(value.to_s, ENV)
       end
       break
     end
