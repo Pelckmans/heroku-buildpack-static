@@ -2,7 +2,7 @@
 eval(File.read('/app/bin/config/lib/nginx_config_util.rb'))
 
 USER_CONFIG = "/app/static.json"
-NGINX_CONFIG = 'config/test.conf'
+NGINX_CONFIG = '/app/static2.json'
 
 
 config = {}
