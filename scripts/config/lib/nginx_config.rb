@@ -86,7 +86,7 @@ class NginxConfig
 
     print 'printing  json["headers"]',  json["headers"]
 
-    File.write(json_file, json["headers"].to_json)
+    File.write(json_file, json.to_json)
 
     json.each do |key, value|
       self.class.send(:define_method, key) { value }
