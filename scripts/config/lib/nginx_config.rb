@@ -84,9 +84,10 @@ class NginxConfig
         print 'in 2nd loop =>  header_hash', header_hash
     end
 
+    print 'the path', json_file
     print 'printing  json["headers"]',  json["headers"]
 
-    File.write(json_file, json.to_json)
+    File.write(json_file, json["headers"].to_json)
 
     json.each do |key, value|
       self.class.send(:define_method, key) { value }
