@@ -72,21 +72,11 @@ class NginxConfig
     json["headers"] ||= {}
     json["headers"].to_a.reverse.each do |route, header_hash|
         header_hash.each do |key, value|
-            print 'in loop =>  key', key.to_s
-            print 'in loop =>  value', value.to_s
-            print 'in loop => interpolated', NginxConfigUtil.interpolate(value.to_s, ENV).to_s
             json["headers"][route][key] = NginxConfigUtil.interpolate(value.to_s, ENV).to_s
         end
     end
 
-    json["headers"].to_a.reverse.each do |route, header_hash|
-        print 'in 2nd loop =>  route', route
-        print 'in 2nd loop =>  header_hash', header_hash
-    end
-
-    print 'the path', json_file
-    print 'printing  json["headers"]',  json["headers"]
-
+    print 'printing json["headers"]', json["headers"]
     File.write('headers.json', json["headers"].to_json)
 
     json.each do |key, value|

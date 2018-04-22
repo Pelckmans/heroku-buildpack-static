@@ -15,10 +15,10 @@ if config["headers"]
     if Regexp.compile("^#{NginxConfigUtil.to_regex(route)}$") =~ uri
       header_hash.each do |key, value|
 
-        # value must be a string
         print 'in headers.rb => key =>', key
         print 'in headers.rb =>  value.to_s =>',  value.to_s
 
+        # value must be a string
         req.headers_out[key] = value.to_s
       end
       break
