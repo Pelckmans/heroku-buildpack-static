@@ -5,10 +5,14 @@ USER_CONFIG = "/app/static.json"
 NGINX_CONFIG = '/app/bin/config/lib/static2.json'
 
 
+
 config = {}
 config = JSON.parse(File.read(USER_CONFIG)) if File.exist?(USER_CONFIG)
 req    = Nginx::Request.new
 uri    = req.var.uri
+
+print 'in headers.rb, printing config', config
+print 'testing env ENV["SOME_VAR"]', ENV["SOME_VAR"]
 
 if config["headers"]
   config["headers"].to_a.reverse.each do |route, header_hash|
