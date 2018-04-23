@@ -10,8 +10,8 @@ uri    = req.var.uri
 
 print 'in headers.rb, printing config', config
 
-if config["headers"]
-  config["headers"].to_a.reverse.each do |route, header_hash|
+if config
+  config.to_a.reverse.each do |route, header_hash|
     if Regexp.compile("^#{NginxConfigUtil.to_regex(route)}$") =~ uri
       header_hash.each do |key, value|
 
