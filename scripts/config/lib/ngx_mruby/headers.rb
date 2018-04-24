@@ -8,15 +8,10 @@ config = JSON.parse(File.read(USER_CONFIG)) if File.exist?(USER_CONFIG)
 req    = Nginx::Request.new
 uri    = req.var.uri
 
-print 'in headers.rb, printing config', config
-
 if config
   config.to_a.reverse.each do |route, header_hash|
     if Regexp.compile("^#{NginxConfigUtil.to_regex(route)}$") =~ uri
       header_hash.each do |key, value|
-
-        print 'in headers.rb => key =>', key
-        print 'in headers.rb =>  value.to_s =>',  value.to_s
 
         # value must be a string
         req.headers_out[key] = value.to_s

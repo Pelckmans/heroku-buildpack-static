@@ -76,7 +76,6 @@ class NginxConfig
         end
     end
 
-    print 'printing json["headers"]', json["headers"]
     File.write('headers.json', json["headers"].to_json)
 
     json.each do |key, value|
