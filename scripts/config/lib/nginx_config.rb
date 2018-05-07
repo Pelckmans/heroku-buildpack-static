@@ -70,9 +70,15 @@ class NginxConfig
     json["resolver"] = nameservers.join(" ")
 
     json["headers"] ||= {}
+    cookies = []
     json["headers"].to_a.each do |route, header_hash|
         header_hash.each do |key, value|
-            json["headers"][route][key] = NginxConfigUtil.interpolate(value.to_s, ENV).to_s
+            if key.match(/^Set-Cookie/)
+                cookies.push(NginxConfigUtil.interpolate(value.to_s, ENV).to_s)
+                json["headers"][route]["Set-Cookie"] = cookies
+            else
+                json["headers"][route][key] = NginxConfigUtil.interpolate(value.to_s, ENV).to_s
+            end
         end
     end
 
