@@ -74,9 +74,11 @@ class NginxConfig
     json["headers"].to_a.each do |route, header_hash|
         header_hash.each do |key, value|
             print 'printing in header hash: key =>', key
-            if key.match(/^Set-Cookie/)
+            if key == "Set-Cookie"
                 print 'key matches!', key
-                cookieValues.push(NginxConfigUtil.interpolate(value.to_s, ENV).to_s)
+                value.each do |cookieValue|
+                    cookieValues.push(NginxConfigUtil.interpolate(cookieValue.to_s, ENV).to_s)
+                end
                 json["headers"][route]["Set-Cookie"] = cookieValues
             else
                 print 'going to add to normal key', key

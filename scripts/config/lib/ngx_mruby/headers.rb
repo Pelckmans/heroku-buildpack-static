@@ -20,7 +20,6 @@ if config
                     # value must be a string
                     req.headers_out[key] = cookieValue.to_s
                 end
-                break
             else
                 # value must be a string
                 req.headers_out[key] = value.to_s
