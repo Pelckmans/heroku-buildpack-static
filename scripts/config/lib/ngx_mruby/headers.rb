@@ -3,6 +3,8 @@ eval(File.read('/app/bin/config/lib/nginx_config_util.rb'))
 
 USER_CONFIG = "/app/headers.json"
 
+print 'printing /app/headers.json =>', File.read(USER_CONFIG)
+
 config = {}
 config = JSON.parse(File.read(USER_CONFIG)) if File.exist?(USER_CONFIG)
 req    = Nginx::Request.new
