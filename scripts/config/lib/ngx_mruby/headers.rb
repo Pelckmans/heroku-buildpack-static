@@ -10,6 +10,10 @@ config = JSON.parse(File.read(USER_CONFIG)) if File.exist?(USER_CONFIG)
 req    = Nginx::Request.new
 uri    = req.var.uri
 
+print 'printing req.var', req.var
+print 'printing req', req
+print 'printing $host', $host
+
 if config
   config.to_a.reverse.each do |route, header_hash|
     print 'in config loop => route:', route
@@ -18,7 +22,7 @@ if config
         print 'match between route and uri'
         header_hash.each do |key, value|
             if key == "Set-Cookies"
-                print 'value for Set-Cookies: ', value
+                print 'value for Set-Cookies: ', valueprinting
                 req.headers_out[key] = value
             else
                 # value must be a string
