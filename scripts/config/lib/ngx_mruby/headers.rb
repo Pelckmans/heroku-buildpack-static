@@ -22,7 +22,7 @@ if config
         print 'match between route and uri'
         header_hash.each do |key, value|
             if key == "Set-Cookies"
-                print 'value for Set-Cookies: ', value
+                print 'value for Set-Cookies:', value
                 req.headers_out[key] = value
             else
                 # value must be a string
