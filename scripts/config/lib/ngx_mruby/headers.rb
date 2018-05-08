@@ -12,12 +12,13 @@ uri    = req.var.uri
 
 if config
   config.to_a.reverse.each do |route, header_hash|
+    print 'in config loop => route:', route
+    print 'in config loop => uri:', uri
     if Regexp.compile("^#{NginxConfigUtil.to_regex(route)}$") =~ uri
         header_hash.each do |key, value|
             if key == "Set-Cookie"
                 value.each do |cookieValue|
-                    print 'inside cookie loop =>', cookieValue.to_s
-                    # value must be a string
+                    print 'in Set-Cookie loop =>', cookieValue.to_s
                     req.headers_out[key] = cookieValue.to_s
                 end
             else
