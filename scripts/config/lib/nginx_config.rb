@@ -70,20 +70,9 @@ class NginxConfig
     json["resolver"] = nameservers.join(" ")
 
     json["headers"] ||= {}
-    cookieValues = []
     json["headers"].to_a.each do |route, header_hash|
         header_hash.each do |key, value|
-            print 'printing in header hash: key =>', key
-            if key == "Set-Cookies"
-                print 'key matches!', key
-                value.each do |cookieValue|
-                    cookieValues.push(NginxConfigUtil.interpolate(cookieValue.to_s, ENV).to_s)
-                end
-                json["headers"][route][key] = cookieValues
-            else
-                print 'going to add to normal key', key
-                json["headers"][route][key] = NginxConfigUtil.interpolate(value.to_s, ENV).to_s
-            end
+            json["headers"][route][key] = NginxConfigUtil.interpolate(value.to_s, ENV).to_s
         end
     end
 
