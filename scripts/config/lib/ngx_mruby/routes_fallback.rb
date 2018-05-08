@@ -2,7 +2,6 @@
 eval(File.read('/app/bin/config/lib/nginx_config_util.rb'))
 
 USER_CONFIG = "/app/static.json"
-print 'printing /app/static.json =>', File.read(USER_CONFIG)
 
 config    = {}
 config    = JSON.parse(File.read(USER_CONFIG)) if File.exist?(USER_CONFIG)
