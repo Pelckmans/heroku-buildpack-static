@@ -16,11 +16,8 @@ if config
     print 'in config loop => uri:', uri
     if Regexp.compile("^#{NginxConfigUtil.to_regex(route)}$") =~ uri
         header_hash.each do |key, value|
-            if key == "Set-Cookie"
-                value.each do |cookieValue|
-                    print 'in Set-Cookie loop =>', cookieValue.to_s
-                    req.headers_out[key] = cookieValue.to_s
-                end
+            if key == "Set-Cookie" & value.kind_of?(Array)
+                req.headers_out["Set-Cookies"] = value
             else
                 # value must be a string
                 req.headers_out[key] = value.to_s
