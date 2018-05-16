@@ -12,7 +12,7 @@ print 'printing /app/headers.json =>', config
 
 if config
   config.to_a.reverse.each do |route, header_hash|
-    print "^#{NginxConfigUtil.to_regex(route)}$"), uri
+    print "^#{NginxConfigUtil.to_regex(route)}$", uri
     if Regexp.compile("^#{NginxConfigUtil.to_regex(route)}$") =~ uri
       header_hash.each do |key, value|
 
