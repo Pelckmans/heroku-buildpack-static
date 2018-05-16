@@ -9,6 +9,7 @@ class NginxConfig
     clean_urls: false,
     https_only: false,
     worker_connections: 512,
+    client_max_body_size: 1,
     resolver: "8.8.8.8",
     logging: {
       "access" => true,
@@ -20,6 +21,7 @@ class NginxConfig
     json = {}
     json = JSON.parse(File.read(json_file)) if File.exist?(json_file)
     json["worker_connections"] ||= ENV["WORKER_CONNECTIONS"] || DEFAULT[:worker_connections]
+    json["client_max_body_size"] ||= ENV["CLIENT_MAX_BODY_SIZE"] || DEFAULT[:client_max_body_size]
     json["port"] ||= ENV["PORT"] || 5000
     json["root"] ||= DEFAULT[:root]
     json["encoding"] ||= DEFAULT[:encoding]
