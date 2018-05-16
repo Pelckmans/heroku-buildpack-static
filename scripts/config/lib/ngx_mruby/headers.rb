@@ -8,6 +8,8 @@ config = JSON.parse(File.read(USER_CONFIG)) if File.exist?(USER_CONFIG)
 req    = Nginx::Request.new
 uri    = req.var.uri
 
+print 'printing /app/headers.json =>', config
+
 if config
   config.to_a.reverse.each do |route, header_hash|
     if Regexp.compile("^#{NginxConfigUtil.to_regex(route)}$") =~ uri
