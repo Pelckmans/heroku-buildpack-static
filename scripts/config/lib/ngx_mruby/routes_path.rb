@@ -2,13 +2,15 @@
 eval(File.read('/app/bin/config/lib/nginx_config_util.rb'))
 
 USER_CONFIG = "/app/static.json"
+ROUTE_CONFIG = "/app/processed-routes.json"
 
 config      = {}
 config      = JSON.parse(File.read(USER_CONFIG)) if File.exist?(USER_CONFIG)
 req         = Nginx::Request.new
 uri         = req.var.uri
 nginx_route = req.var.route
-routes      = NginxConfigUtil.parse_routes(config["routes"])
+routes      = {}
+routes      = JSON.parse(File.read(ROUTE_CONFIG)) if File.exist?(ROUTE_CONFIG)
 proxies     = config["proxies"] || {}
 redirects   = config["redirects"] || {}
 

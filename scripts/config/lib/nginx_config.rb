@@ -58,6 +58,9 @@ class NginxConfig
     json["routes"] ||= {}
     json["routes"] = NginxConfigUtil.parse_routes(json["routes"])
 
+    # Store to processed routes for later
+    File.write('processed-routes.json', json["routes"].to_json)
+
     json["redirects"] ||= {}
     json["redirects"].each do |loc, hash|
       json["redirects"][loc].merge!("url" => NginxConfigUtil.interpolate(hash["url"], ENV))
